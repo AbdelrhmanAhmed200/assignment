@@ -52,12 +52,12 @@ class TransferPage extends StatelessWidget {
               ]
             ),
             SizedBox(height: 20,),
-            TransferContacttile(name: "abdelrhman", account: "kjkdskka ajhugau ahuahd", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
-            TransferContacttile(name: "Al-hassan", account: "kjkdskka ajkknau ahuahd", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
-            TransferContacttile(name: "mazen", account: "kjjhkslkqkskka ajhugau ahuahd", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
-            TransferContacttile(name: "abdelrhman", account: "kjkdskka ajhugau ahuahd", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
-            TransferContacttile(name: "Al-hassan", account: "kjkdskka ajkknau ahuahd", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
-            TransferContacttile(name: "mazen", account: "kjjhkslkqkskka ajhugau ahuahd", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
+            TransferContacttile(name: "Abdelrhman", account: "AW BANK UNI 234-46589-000", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
+            TransferContacttile(name: "Al-hassan", account: "AW BANK UNI 234-46589-000", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
+            TransferContacttile(name: "Mazen", account: "AW BANK UNI 234-46589-000", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
+            TransferContacttile(name: "Omar", account: "AW BANK UNI 234-46589-000", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
+            TransferContacttile(name: "Ahmed", account: "AW BANK UNI 234-46589-000", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
+            TransferContacttile(name: "xDawideq", account: "AW BANK UNI 234-46589-000", imageUrl:"https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg") ,
           ]
         )
         

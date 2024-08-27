@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'transaction_item.dart';
+import 'Transactions_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -52,15 +53,25 @@ class HomePage extends StatelessWidget {
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  
                   SizedBox(height: 10),
+                  Text("Current Balance",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      
+                    ),  
+                  ),
+                    SizedBox(height: 15,),
                   Text(
                     '\$12,567,890',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  
                   SizedBox(height: 20),
                   Text(
                     '3452 1235 7894 1678',
@@ -78,15 +89,50 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            ), 
+            const SizedBox(height: 15,),
+             Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  
+
             const SizedBox(height: 20),
             const Text(
               'LAST TRANSACTIONS',
               style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                fontWeight: FontWeight.bold
+                
               ),
             ),
+            const Spacer(),
+             GestureDetector(
+                  onTap: () {
+                    // Navigate to the TransactionsPage when 'More' is tapped
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TransactionsPage(),
+                      ),
+                    );
+                  },
+            
+            
+            
+            child: const Text(
+              'More',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+                
+              ),
+            ),
+            )
+
+                ]
+             ),
             const SizedBox(height: 10),
             const TransactionItem(
               title: 'Shopping',

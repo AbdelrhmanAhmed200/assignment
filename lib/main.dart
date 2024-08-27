@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Home_page.dart';
-import 'Transactions_page.dart';
-import 'Transfer_page.dart';
+import 'Transfer_page.dart'; // Ensure this is imported correctly
+
 void main() {
   runApp(MyApp());
 }
@@ -15,9 +15,8 @@ class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const HomePage(),
-    const TransactionsPage(),
-    const TransferPage(),
+    const HomePage(),       // Home Page
+    const TransferPage(),   // Transfer Page
   ];
 
   void _onItemTapped(int index) {
@@ -32,7 +31,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
-          child: _pages[_selectedIndex],
+          child: _pages[_selectedIndex],  // Show the selected page
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,
@@ -40,13 +39,9 @@ class _MyAppState extends State<MyApp> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.wallet),
-              label: 'wallet',
+              label: 'Wallet',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'Transactions',
-            ),
-              BottomNavigationBarItem(
               icon: Icon(Icons.send),
               label: 'Transfer',
             ),
@@ -56,4 +51,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
