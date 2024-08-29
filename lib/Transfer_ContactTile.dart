@@ -16,7 +16,7 @@ class TransferContacttile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+   
    
     return Padding(
       
@@ -40,7 +40,7 @@ class TransferContacttile extends StatelessWidget {
             backgroundImage: NetworkImage(imageUrl),
             
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,7 +51,7 @@ class TransferContacttile extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 account,
                 style: const TextStyle(
