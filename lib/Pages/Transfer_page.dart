@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Transfe_bulidicon1.dart';
-import 'Transfer_ContactTile.dart';
+import '../Transfe_bulidicon1.dart';
+import '../Transfer_ContactTile.dart';
 
 
 class TransferPage extends StatelessWidget {
@@ -10,22 +10,51 @@ class TransferPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CircleAvatar(
-              backgroundImage: NetworkImage(
-                'https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg',
-              ),
-              radius: 20, // Adjust the radius as needed
+             Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(2), // Space between avatar and border
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 98, 47, 238),
+                        Color.fromARGB(255, 239, 142, 242),
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                  ),
+                  child: const CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        'https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg'),
+                    radius: 20,
+                  ),
+                ),
+                Positioned(
+                  top: 3, // Adjust this to position the dot correctly
+                  right: 0, // Adjust this to position the dot correctly
+                  child: Container(
+                    width: 8.47,
+                    height: 8.47,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color.fromARGB(219, 245, 5, 5),
+                    ),
+                  ),
+                ),
+              ],
             ),
-             Spacer(),
-            SizedBox(width: 8), // Space between image and text
-            Text(
+             const Spacer(),
+            const SizedBox(width: 8), // Space between image and text
+            const Text(
               "Transfer",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-             Spacer(),
+             const Spacer(),
           ],
         ),
         actions: [

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'Home_page.dart';
-import 'Transfer_page.dart';
-import 'Reports_page.dart';
-import 'More_page.dart';
+import '';
+import 'Pages/Home_page.dart';
+import 'Pages/Transfer_page.dart';
+import 'Pages/Reports_page.dart';
+import 'Pages/More_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
+    
     const HomePage(),
     const TransferPage(),
     const ReportsPage(),
