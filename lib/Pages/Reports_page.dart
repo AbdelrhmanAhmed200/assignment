@@ -16,33 +16,50 @@ class ReportsPage extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(2), // Space between avatar and border
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [
-                        Color.fromARGB(255, 98, 47, 238),
-                        Color.fromARGB(255, 239, 142, 242),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                  ),
+                            padding: const EdgeInsets.all(2), // Space between avatar and border
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 98, 47, 238),
+                                  Color.fromARGB(255, 239, 142, 242)
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                            ),
+                          child: Container(
+                            padding: const EdgeInsets.all(2), // Space between avatar and border
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 238, 238, 239),
+                                  Color.fromARGB(255, 251, 251, 251)
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                            ),
                   child: const CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        'https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg'),
+                    backgroundImage:AssetImage('images/me.png'),
                     radius: 20,
                   ),
                 ),
+                ),
                 Positioned(
-                  top: 3, // Adjust this to position the dot correctly
-                  right: 0, // Adjust this to position the dot correctly
+                  top: 4, // Adjust this to position the dot correctly
+                  right: 1, // Adjust this to position the dot correctly
                   child: Container(
-                    width: 8.47,
-                    height: 8.47,
-                    decoration: const BoxDecoration(
+                    width: 8,
+                    height: 8,
+                    decoration:  BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color.fromARGB(219, 245, 5, 5),
+                      color: const Color.fromARGB(219, 245, 5, 5),
+                      border: Border.all(
+                                  color: Colors.white,
+                                  
+                                ),
                     ),
                   ),
                 ),

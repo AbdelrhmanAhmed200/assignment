@@ -4,13 +4,13 @@ class TransferContacttile extends StatelessWidget {
   
   final String name;
   final String account;
-  final String imageUrl;
+  final String image;
 
   const TransferContacttile({super.key, 
     
     required this.name,
     required this.account,
-    required this.imageUrl
+    required this.image,
   });
 
 
@@ -37,7 +37,7 @@ class TransferContacttile extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(imageUrl),
+            backgroundImage: AssetImage(image),
             
           ),
           const SizedBox(width: 16),

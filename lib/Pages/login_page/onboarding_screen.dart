@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Pages/Home_page.dart';
+
+import 'login_screen1.dart';
+import 'login_screen2.dart';
+import 'login_screan3.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -25,18 +29,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             onPageChanged: (index) {
               setState(() {
                 onLastPage = (index == 2);
-              });
+              }
+              );
             },
-            children: [
+            children: const [
               // Replace with your actual onboarding content widgets
-              Container(color: Colors.red),
-              Container(color: Colors.green),
-              Container(color: Colors.blue),
+              LoginScreen1(),
+              LoginScreen2(),
+              login_screen3(),
             ],
           ),
           // Dot indicators
           Align(
-            alignment: const Alignment(0.0, 0.80),
+            alignment: const Alignment(0.0, 0.75),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -45,7 +50,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   onTap: () {
                     _controller.jumpToPage(2);
                   },
-                  child: const Text('skip'),
+                  child: const Text('skip', style: TextStyle(color: Colors.black)),
                 ),
                 // Dot indicator
                 SmoothPageIndicator(controller: _controller, count: 3),
@@ -55,10 +60,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         onTap: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => const HomePage()),
+                            MaterialPageRoute(builder: (context) => const MyApp()),
                           );
                         },
-                        child: const Text('done'),
+                        child: const Text('done',style: TextStyle(color: Colors.black)),
                       )
                     : GestureDetector(
                         onTap: () {
@@ -67,7 +72,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             curve: Curves.easeIn,
                           );
                         },
-                        child: const Text('next'),
+                        
+                        child: const Text('next', style: TextStyle(color: Colors.black)),
                       ),
               ],
             ),

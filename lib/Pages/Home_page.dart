@@ -67,22 +67,39 @@ class HomePage extends StatelessWidget {
                                 end: Alignment.centerRight,
                               ),
                             ),
+                          child: Container(
+                            padding: const EdgeInsets.all(4), // Space between avatar and border
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromARGB(255, 238, 238, 239),
+                                  Color.fromARGB(255, 251, 251, 251)
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                            ),
                             child: const CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  'https://fbi.cults3d.com/uploaders/14684840/illustration-file/388d5e1a-7c44-4172-a0c9-0a34c088be8c/sova-avatar.jpg'),
+                              backgroundImage: AssetImage('images/me.png'),
                               radius: 30,
                             ),
                           ),
+                          ),
                           // Red dot at the top right of the avatar
                           Positioned(
-                            top: 4.5,
-                            right: 1,
+                            top: 5.5,
+                            right: 4,
                             child: Container(
                               width: 13,
                               height: 13,
-                              decoration: const BoxDecoration(
+                              decoration:  BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color.fromARGB(219, 245, 5, 5),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2,
+                                ),
                               ),
                             ),
                           ),
@@ -98,7 +115,7 @@ class HomePage extends StatelessWidget {
                             style: TextStyle(fontSize: 18),
                           ),
                           Text(
-                            'Sova',
+                            'Abdelrhman Ahmed ',
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,

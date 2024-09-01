@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class TransfeBulidicon1 extends StatelessWidget {
-  final String imageUrl;
+  final String image;
 
   const TransfeBulidicon1({
     super.key,
-    required this.imageUrl,
+    required this.image,
   });
 
   @override
   Widget build(BuildContext context) {
-    return buildIconTransfer(imageUrl);
+    return buildIconTransfer(image);
   }
 
-  Padding buildIconTransfer(String imageUrl) {
+  Padding buildIconTransfer(String image) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 13.0),
       child: Container(
@@ -30,16 +30,19 @@ class TransfeBulidicon1 extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 9.0),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(imageUrl),
-                radius: 25,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0), // Padding around the image
+          child: Container(
+            width: 50, // Adjust the size of the image
+            height: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5), // Square with slight rounding
+              image: DecorationImage(
+                image: AssetImage(image),
+                fit: BoxFit.contain, // Ensures the entire image fits inside the container
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

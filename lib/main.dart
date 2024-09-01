@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import '';
+
+import 'package:flutter_application_1/Pages/login_page/onboarding_screen.dart';
+
 import 'Pages/Home_page.dart';
 import 'Pages/Transfer_page.dart';
 import 'Pages/Reports_page.dart';
 import 'Pages/More_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const app());
 }
 
 class MyApp extends StatefulWidget {
@@ -35,15 +37,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-        ),
-      ),
-      home: Scaffold(
+    return  Scaffold(
         body: _pages[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,
@@ -68,8 +62,8 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
         ),
-      ),
     );
+    
   }
 
   Widget _buildGradientIcon(IconData icon, bool isSelected) {
@@ -98,5 +92,22 @@ class _MyAppState extends State<MyApp> {
         color: const Color.fromARGB(255, 119, 119, 119), // Gray color for unselected icons
       );
     }
+  }
+}
+ class app extends StatelessWidget {
+  const app({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+        ),
+      ),
+      home:const OnBoardingScreen()
+    );
   }
 }
