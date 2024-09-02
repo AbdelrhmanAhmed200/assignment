@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Pages/login_page/sign_up_page.dart';
 
 import 'login_screen1.dart';
 import 'login_screen2.dart';
@@ -50,7 +51,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   onTap: () {
                     _controller.jumpToPage(2);
                   },
-                  child: const Text('skip', style: TextStyle(color: Colors.black)),
+                  child: Container(
+                    padding: const EdgeInsets.all(15.0),
+          decoration: BoxDecoration( 
+
+            color: const Color.fromARGB(255, 24, 2, 170),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+
+                    child: const Text('skip', style: TextStyle(color: Colors.white)),
+                  ) 
                 ),
                 // Dot indicator
                 SmoothPageIndicator(controller: _controller, count: 3),
@@ -60,10 +70,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         onTap: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => const MyApp()),
+                            MaterialPageRoute(builder: (context) => const SignUpPage()),
                           );
                         },
-                        child: const Text('done',style: TextStyle(color: Colors.black)),
+                        child:Container(
+                    padding: const EdgeInsets.all(15.0),
+          decoration: BoxDecoration( 
+
+            color: const Color.fromARGB(255, 24, 2, 170),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+
+                    child: const Text('done',style: TextStyle(color: Colors.white)),
+                        )
                       )
                     : GestureDetector(
                         onTap: () {
@@ -73,7 +92,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           );
                         },
                         
-                        child: const Text('next', style: TextStyle(color: Colors.black)),
+                        child:Container(
+                    padding: const EdgeInsets.all(15.0),
+          decoration: BoxDecoration( 
+
+            color: const Color.fromARGB(255, 24, 2, 170),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+
+                    child: const Text('next', style: TextStyle(color: Colors.white)),
+                        )
                       ),
               ],
             ),
