@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_application_1/Pages/Home_page.dart';
-import 'package:flutter_application_1/Pages/login_page/sign_up_page.dart';
-import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/Controllers/Login_Controller.dart';
+import 'package:flutter_application_1/Models/Login_Model.dart';
+
+import 'sign_up_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,7 +14,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _passwordVisible = false;
-  bool _confirmPasswordVisible = false;
+
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,40 +31,32 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.all(0.0),
                 child: SizedBox(
-                  width: 70, // Adjust the size of the image
+                  width: 70,
                   height: 50,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100), // Square with slight rounding
+                      borderRadius: BorderRadius.circular(100),
                       image: const DecorationImage(
                         image: AssetImage("images/visa.png"),
-                        fit: BoxFit.contain, // Ensures the entire image fits inside the container
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
                 ),
               ),
               const SizedBox(height: 30),
-
-              // Sign Up Text
               const Text(
                 "Login",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-
               const SizedBox(height: 30),
-
-              // Email Address Field
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: "Email Address",
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // Password Field with visibility toggle
               TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(labelText: "Username"),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _passwordController,
                 obscureText: !_passwordVisible,
                 decoration: InputDecoration(
                   labelText: "Password",
@@ -77,21 +72,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-
-             
-
               const SizedBox(height: 30),
-
-              // Login Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const MyApp()),
-                    );
-                  },
+                  onPressed: _onLoginPressed,
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
@@ -105,10 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 20),
-
-              // OR Divider
               const Row(
                 children: [
                   Expanded(child: Divider()),
@@ -119,18 +101,14 @@ class _LoginPageState extends State<LoginPage> {
                   Expanded(child: Divider()),
                 ],
               ),
-
               const SizedBox(height: 20),
-
-              // Social Login Buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Google Icon Container
                   InkWell(
                     onTap: () {
                       // Handle Google login
-                      print('Google icon tapped');
+                      
                     },
                     child: Container(
                       width: 60,
@@ -155,12 +133,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(width: 40),
-
-                  // Facebook Icon Container
                   InkWell(
                     onTap: () {
                       // Handle Facebook login
-                      print('Facebook icon tapped');
+                      
                     },
                     child: Container(
                       width: 60,
@@ -186,10 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-
               const SizedBox(height: 30),
-
-              // Already have an account? Sign Up (Only Sign Up clickable)
               Center(
                 child: RichText(
                   text: TextSpan(
@@ -211,7 +184,6 @@ class _LoginPageState extends State<LoginPage> {
                               context,
                               MaterialPageRoute(builder: (context) => const SignUpPage()),
                             );
-                            // Navigate to Sign Up page
                           },
                       ),
                     ],
@@ -223,5 +195,23 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void _onLoginPressed() {
+    final userLogin = UserLogin(
+      username: _usernameController.text,
+      password: _passwordController.text,
+    );
+
+    if (userLogin.username.isEmpty || userLogin.password.isEmpty) {
+      // Show error if username or password is empty
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Username and password cannot be empty')),
+      );
+      return;
+    }
+
+    final loginController = LoginController(context: context);
+    loginController.login(userLogin);
   }
 }

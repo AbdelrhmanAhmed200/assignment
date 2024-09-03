@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../Transfe_bulidicon1.dart';
-import '../Transfer_ContactTile.dart';
+import '../Sup_Classes/Transfe_bulidicon1.dart';
+import '../Sup_Classes/Transfer_ContactTile.dart';
 
 
 class TransferPage extends StatelessWidget {

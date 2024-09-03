@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../MonthlySpendingChart.dart';
-import '../Reports_item.dart';
-import '../Reports_item2.dart';
+import '../Sup_Classes/MonthlySpendingChart.dart';
+import '../Sup_Classes/Reports_item.dart';
+import '../Sup_Classes/Reports_item2.dart';
 
 class ReportsPage extends StatelessWidget {
   const ReportsPage({super.key});

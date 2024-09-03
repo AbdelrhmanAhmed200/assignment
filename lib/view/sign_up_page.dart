@@ -1,8 +1,11 @@
+// lib/views/sign_up_page.dart
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Pages/Home_page.dart';
-import 'package:flutter_application_1/main.dart';
-import 'login_page.dart';
+import 'package:flutter_application_1/view/login_page.dart';
+import 'package:flutter_application_1/Controllers/Sign_Up_Controller.dart';
+import 'package:flutter_application_1/Models/Sign_Up_Model.dart';
+
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -15,6 +18,13 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _passwordVisible = false;
   bool _confirmPasswordVisible = false;
 
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,47 +35,50 @@ class _SignUpPageState extends State<SignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 25),
-               Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: SizedBox(
-                      width: 70, // Adjust the size of the image
-                      height: 50,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100), // Square with slight rounding
-                          image: const DecorationImage(
-                            image: AssetImage("images/visa.png"),
-                            fit: BoxFit.contain, // Ensures the entire image fits inside the container
-                          ),
-                        ),
+              Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: SizedBox(
+                  width: 70,
+                  height: 50,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      image: const DecorationImage(
+                        image: AssetImage("images/visa.png"),
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
-
-              // Logo Placeholder
-             
-
+                ),
+              ),
               const SizedBox(height: 30),
-
-              // Sign Up Text
               const Text(
                 "Sign Up",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-
               const SizedBox(height: 30),
-
-              // Email Address Field
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: "Email Address",
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // Password Field with visibility toggle
               TextField(
+                controller: _firstNameController,
+                decoration: const InputDecoration(labelText: "First Name"),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _lastNameController,
+                decoration: const InputDecoration(labelText: "Last Name"),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(labelText: "Username"),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: "Email Address"),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _passwordController,
                 obscureText: !_passwordVisible,
                 decoration: InputDecoration(
                   labelText: "Password",
@@ -81,11 +94,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 20),
-
-              // Confirm Password Field with visibility toggle
               TextField(
+                controller: _confirmPasswordController,
                 obscureText: !_confirmPasswordVisible,
                 decoration: InputDecoration(
                   labelText: "Confirm Password",
@@ -101,34 +112,22 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 30),
-
-              // Sign Up Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const MyApp()),
-                          );
-
-                  },
+                  onPressed: _onSignUpPressed,
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    backgroundColor: const Color.fromARGB(255, 53, 72, 239)
+                    backgroundColor: const Color.fromARGB(255, 53, 72, 239),
                   ),
-                  child: const Text("Sign Up",style: TextStyle(color: Colors.white),),
+                  child: const Text("Sign Up", style: TextStyle(color: Colors.white)),
                 ),
               ),
-
               const SizedBox(height: 20),
-
-              // OR Divider
               const Row(
                 children: [
                   Expanded(child: Divider()),
@@ -139,14 +138,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   Expanded(child: Divider()),
                 ],
               ),
-
               const SizedBox(height: 20),
-
-              // Social Login Buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Google Icon Container
                   Container(
                     width: 60,
                     height: 60,
@@ -163,14 +158,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ],
                     ),
-                    child: Image.asset(
-                      'images/icons/google.png',
-                      fit: BoxFit.contain,
-                    ),
+                    child: Image.asset('images/icons/google.png', fit: BoxFit.contain),
                   ),
-                  const SizedBox(width: 40,),
-
-                  // Facebook Icon Container
+                  const SizedBox(width: 40),
                   Container(
                     width: 60,
                     height: 60,
@@ -187,39 +177,26 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ],
                     ),
-                    child: Image.asset(
-                      'images/icons/facebook.png',
-                      fit: BoxFit.contain,
-                    ),
+                    child: Image.asset('images/icons/facebook.png', fit: BoxFit.contain),
                   ),
                 ],
               ),
-
               const SizedBox(height: 30),
-
-              // Already have an account? Login (Only Login clickable)
               Center(
                 child: RichText(
                   text: TextSpan(
                     text: "Already have an account? ",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                     children: [
                       TextSpan(
                         text: "Login",
-                        style: const TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const LoginPage()),
-                          );
-                            // Navigate to Login page
+                              context,
+                              MaterialPageRoute(builder: (context) => const LoginPage()),
+                            );
                           },
                       ),
                     ],
@@ -232,6 +209,24 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
+  void _onSignUpPressed() {
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Passwords do not match')),
+      );
+      return;
+    }
+
+    final user = User(
+      firstName: _firstNameController.text,
+      lastName: _lastNameController.text,
+      username: _usernameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+
+    final controller = SignUpController(context: context);
+    controller.signUp(user);
+  }
 }
-
-

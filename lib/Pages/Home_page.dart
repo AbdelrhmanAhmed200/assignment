@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../transaction_item.dart';
+import '../Sup_Classes/transaction_item.dart';
 import 'transactions_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -95,7 +95,7 @@ class HomePage extends StatelessWidget {
                               height: 13,
                               decoration:  BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Color.fromARGB(219, 245, 5, 5),
+                                color: const Color.fromARGB(219, 245, 5, 5),
                                 border: Border.all(
                                   color: Colors.white,
                                   width: 2,
@@ -115,7 +115,7 @@ class HomePage extends StatelessWidget {
                             style: TextStyle(fontSize: 18),
                           ),
                           Text(
-                            'Abdelrhman Ahmed ',
+                            'Abdelrhman Ahmed',
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,

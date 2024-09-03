@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Pages/login_page/sign_up_page.dart';
+import 'package:flutter_application_1/view/sign_up_page.dart';
 
 import 'login_screen1.dart';
 import 'login_screen2.dart';
 import 'login_screan3.dart';
-import 'package:flutter_application_1/main.dart';
+
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
