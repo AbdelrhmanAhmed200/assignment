@@ -15,7 +15,7 @@ class LoginScreen2 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Placeholder for the image at the top
-              Container(
+              SizedBox(
                 height: 200,
                 child:Image.asset("images/login2.png"),  // Replace with your asset image
               ),

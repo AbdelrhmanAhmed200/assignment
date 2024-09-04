@@ -29,7 +29,7 @@ class LoginController {
       final  data = LoginResponse.fromJson(jsonDecode(response.body));
         final username = data.data.username;
         
-        log('data: ${data}'); // Ensure this matches your API response
+        log('data: $data'); // Ensure this matches your API response
         log('username: $username');
         
         // Optionally save token to secure storage here

@@ -1,6 +1,7 @@
 // lib/controllers/sign_up_controller.dart
 
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/Models/Sign_Up_Model.dart';
@@ -18,17 +19,29 @@ class SignUpController {
         Uri.parse(apiUrl),
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: jsonEncode(user.toJson()),
+      
       );
+      log('body : ${user}');
+     
+      if (response.statusCode == 200 && response.body!='''{"success":false}''' ) {
+        log('data: '); // Ensure this matches your API response
+        log('1'+response.body.toString());
+        log('2'+jsonDecode(response.body).toString());
+       
+       
+        
+        
 
-      if (response.statusCode == 201) {
         Navigator.pushReplacementNamed(context, '/login');
       } else {
         final errorData = jsonDecode(response.body);
         final errorMessage = errorData['message'] ?? 'Unknown error';
         _showSnackBar('Sign Up Failed: $errorMessage');
+        log('nothere');
       }
     } catch (e) {
       _showSnackBar('Error: $e');
+      log(e.toString());
     }
   }
 

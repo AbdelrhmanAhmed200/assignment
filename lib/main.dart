@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Pages/Login_Screen/onboarding_screen.dart';
 import 'package:flutter_application_1/Pages/Nav_Bar.dart';
+import 'package:flutter_application_1/view/login_page.dart';
 
 import 'Pages/Home_page.dart';
 import 'Pages/Transfer_page.dart';
@@ -28,6 +29,7 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const OnBoardingScreen(),
+        '/login' : (context) => const LoginPage(),
         '/home': (context) => const MyApp(), // Added route for MyApp
       },
     );
