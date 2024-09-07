@@ -1,11 +1,8 @@
-// lib/views/sign_up_page.dart
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/view/login_page.dart';
 import 'package:flutter_application_1/Controllers/Sign_Up_Controller.dart';
 import 'package:flutter_application_1/Models/Sign_Up_Model.dart';
-
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -211,19 +208,62 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _onSignUpPressed() {
-    if (_passwordController.text != _confirmPasswordController.text) {
+    final firstName = _firstNameController.text.trim();
+    final lastName = _lastNameController.text.trim();
+    final username = _usernameController.text.trim();
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+    final confirmPassword = _confirmPasswordController.text;
+
+    // Validation for fields that should not start or end with space
+    if (firstName.isEmpty || lastName.isEmpty || username.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('First Name, Last Name, and Username cannot be empty')),
+      );
+      return;
+    }
+
+    if (_firstNameController.text != firstName ||
+        _lastNameController.text != lastName ||
+        _usernameController.text != username) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Fields cannot start or end with spaces')),
+      );
+      return;
+    }
+
+    // Email format validation using regex
+    final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    if (!emailRegex.hasMatch(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Invalid email format')),
+      );
+      return;
+    }
+
+    // Password length validation
+    if (password.length < 8) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Password must be at least 8 characters long')),
+      );
+      return;
+    }
+
+    // Passwords match validation
+    if (password != confirmPassword) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Passwords do not match')),
       );
       return;
     }
 
+    // Proceed with sign-up if all validations pass
     final user = User(
-      firstName: _firstNameController.text,
-      lastName: _lastNameController.text,
-      username: _usernameController.text,
-      email: _emailController.text,
-      password: _passwordController.text,
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      email: email,
+      password: password,
     );
 
     final controller = SignUpController(context: context);

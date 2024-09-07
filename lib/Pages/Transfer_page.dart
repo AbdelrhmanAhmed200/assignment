@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/view/payment_screen.dart';
 import '../Sup_Classes/Transfe_bulidicon1.dart';
 import '../Sup_Classes/Transfer_ContactTile.dart';
 
@@ -78,7 +79,13 @@ class TransferPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.add), // The "+" sign
             onPressed: () {
-              // Define the action when the "+" button is pressed
+                                       Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PaymentScreen(),
+                            ),
+                          );
+             
             },
           ),
         ],

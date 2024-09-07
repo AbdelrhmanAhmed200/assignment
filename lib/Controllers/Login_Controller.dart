@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Models/login_response.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/Login_Model.dart';
 
 class LoginController {
@@ -18,21 +19,25 @@ class LoginController {
         Uri.parse(apiUrl),
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
         body: jsonEncode(userLogin.toJson()),
-        
       );
 
       log('Response Status: ${response.statusCode}');
       log('Response Body: ${response.body}');
 
-      if (response.statusCode == 200 && response.body!='''{"success":false}''') {
-        
-      final  data = LoginResponse.fromJson(jsonDecode(response.body));
-        final username = data.data.username;
-        
+      if (response.statusCode == 200 && response.body != '''{"success":false}''') {
+        final data = LoginResponse.fromJson(jsonDecode(response.body));
+        final userAccountID = data.data.userAccountId;
+
         log('data: $data'); // Ensure this matches your API response
-        log('username: $username');
+        log('userAccountID: $userAccountID');
+
+        // Save userAccountID to SharedPreferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('userAccountID', userAccountID);
+
+        // Optionally save token to secure storage here (if token available)
         
-        // Optionally save token to secure storage here
+        // Navigate to home after successful login
         Navigator.pushReplacementNamed(context, '/home');
       } else {
         final errorData = jsonDecode(response.body);
