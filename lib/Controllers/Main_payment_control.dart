@@ -28,11 +28,19 @@ class MainPaymentControl {
 
   // Fetch receiver name by receiverAccountNumber
   Future<ReceiverDetail> fetchReceiverName(String receiverAccountNumber) async {
-    final response = await http.get(Uri.parse('https://api.example.com/receiver?userAccountID=$receiverAccountNumber'));
+    final response = await http.get(Uri.parse('https://ptechapp-5ab6d15ba23c.herokuapp.com/users?receiverAccountNumber=$receiverAccountNumber '));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      return ReceiverDetail(userName: data['username']);
+
+      // Handle both list and map responses
+      if (data is List && data.isNotEmpty) {
+        return ReceiverDetail(userName: data[1]['username']); // Access first item
+      } else if (data is Map) {
+        return ReceiverDetail(userName: data['username']);
+      } else {
+        throw Exception('Unexpected response format');
+      }
     } else {
       throw Exception('Failed to load receiver details');
     }
