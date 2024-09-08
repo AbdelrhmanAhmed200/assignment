@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Pages/Login_Screen/onboarding_screen.dart';
 import 'package:flutter_application_1/Pages/Nav_Bar.dart';
 import 'package:flutter_application_1/view/login_page.dart';
+import 'package:flutter_application_1/view/sign_up_page.dart';
 
-import 'Pages/Home_page.dart';
+import 'view/Home_page.dart';
 import 'Pages/Transfer_page.dart';
 import 'Pages/Reports_page.dart';
-import 'Pages/More_page.dart';
+import 'view/More_page.dart';
 
 
 void main() {
@@ -29,6 +30,7 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const OnBoardingScreen(),
+        '/signUp': (context) => const SignUpPage(),
         '/login' : (context) => const LoginPage(),
         '/home': (context) => const MyApp(), // Added route for MyApp
       },

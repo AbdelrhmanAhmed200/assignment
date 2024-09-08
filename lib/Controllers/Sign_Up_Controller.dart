@@ -21,12 +21,12 @@ class SignUpController {
         body: jsonEncode(user.toJson()),
       
       );
-      log('body : ${user}');
+      log('body : $user');
      
       if (response.statusCode == 200 && response.body!='''{"success":false}''' ) {
         log('data: '); // Ensure this matches your API response
-        log('1'+response.body.toString());
-        log('2'+jsonDecode(response.body).toString());
+        log('1${response.body}');
+        log('2${jsonDecode(response.body)}');
        
        
         

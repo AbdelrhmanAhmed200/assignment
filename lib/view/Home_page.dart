@@ -1,9 +1,52 @@
 import 'package:flutter/material.dart';
-import '../Sup_Classes/transaction_item.dart';
-import 'transactions_page.dart';
+import 'package:flutter_application_1/Controllers/Home_Controller.dart';
+import 'package:flutter_application_1/Models/Home_page_model.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+import '../Sup_Classes/transaction_item.dart';
+import '../Pages/transactions_page.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String? username;
+  double? balance;
+  final UserController _controller = UserController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    String? userAccountID = await _controller.getUserAccountId();
+    if (userAccountID != null) {
+      try {
+        User? user = await _controller.fetchUserByAccountId(userAccountID);
+        if (user != null) {
+          setState(() {
+            username = user.username;
+            balance = user.balance;
+          });
+        } else {
+          // Show error if no user is found
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('User not found')),
+          );
+        }
+      } catch (e) {
+        // Handle error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to load user data: $e')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +61,7 @@ class HomePage extends StatelessWidget {
               width: 200,
               height: 200,
               decoration: const BoxDecoration(
-                color: Color.fromARGB(248, 244, 212, 154), // Change to your desired color
+                color: Color.fromARGB(248, 244, 212, 154),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(200),
                 ),
@@ -33,7 +76,7 @@ class HomePage extends StatelessWidget {
               width: 200,
               height: 200,
               decoration: const BoxDecoration(
-                color: Color.fromARGB(250, 152, 207, 244), // Change to your desired color
+                color: Color.fromARGB(250, 152, 207, 244),
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(200),
                   bottomRight: Radius.circular(200),
@@ -51,11 +94,10 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 40),
                   Row(
                     children: [
-                      // Container with gradient border around CircleAvatar
                       Stack(
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(4), // Space between avatar and border
+                            padding: const EdgeInsets.all(4),
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: LinearGradient(
@@ -67,8 +109,9 @@ class HomePage extends StatelessWidget {
                                 end: Alignment.centerRight,
                               ),
                             ),
-                          child: Container(
-                            padding: const EdgeInsets.all(4), // Space between avatar and border
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(4),
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: LinearGradient(
@@ -85,15 +128,13 @@ class HomePage extends StatelessWidget {
                               radius: 30,
                             ),
                           ),
-                          ),
-                          // Red dot at the top right of the avatar
                           Positioned(
                             top: 5.5,
                             right: 4,
                             child: Container(
                               width: 13,
                               height: 13,
-                              decoration:  BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: const Color.fromARGB(219, 245, 5, 5),
                                 border: Border.all(
@@ -103,20 +144,19 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          
                         ],
                       ),
                       const SizedBox(width: 16),
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Good morning',
                             style: TextStyle(fontSize: 18),
                           ),
                           Text(
-                            'Abdelrhman Ahmed',
-                            style: TextStyle(
+                            username ?? 'User', // Fallback to 'User' if username is null
+                            style: const TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
                             ),
@@ -131,7 +171,7 @@ class HomePage extends StatelessWidget {
                       const SizedBox(height: 20, width: 50),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.8,
-                        height: MediaQuery.of(context).size.height * 0.15,
+                        height: MediaQuery.of(context).size.height * 0.119,
                         padding: const EdgeInsets.all(8),
                         decoration: const BoxDecoration(
                           color: Colors.white,
@@ -140,21 +180,21 @@ class HomePage extends StatelessWidget {
                             topRight: Radius.circular(20),
                           ),
                         ),
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 10),
-                            Text(
+                            const SizedBox(height: 10),
+                            const Text(
                               " Current Balance",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Text(
-                              ' \$12,567,890',
-                              style: TextStyle(
+                              balance != null ? ' \$${balance!.toStringAsFixed(2)}' : '\$0.00',
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -247,7 +287,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
+         const SizedBox(height: 10),
                   const TransactionItem(
                     title: 'Shopping',
                     date: 'Tue 15.06.2021',

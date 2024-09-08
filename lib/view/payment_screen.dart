@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Controllers/PaymentController.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -9,28 +10,50 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  final TextEditingController _senderUsernameController = TextEditingController();
   final TextEditingController _receiverUsernameController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
+  String? _senderAccountID;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSenderAccountID();
+  }
+
+  // Load the sender's account ID from shared preferences
+  Future<void> _loadSenderAccountID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _senderAccountID = prefs.getString('userAccountID');
+    });
+  }
 
   void makePayment() async {
-    String senderUsername = _senderUsernameController.text;
+    if (_senderAccountID == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Sender account ID not available')),
+      );
+      return;
+    }
+
     String receiverUsername = _receiverUsernameController.text;
     double paymentAmount = double.tryParse(_amountController.text) ?? 0.0;
-    String paymentType = 'test';
+    String paymentType = 'test';  // You may want to change this based on your payment type logic.
 
-    // Call PaymentController to search for both sender and receiver IDs, then make the payment
+    if (paymentAmount <= 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Enter a valid payment amount')),
+      );
+      return;
+    }
+
+    // Call PaymentController to make the payment
     await PaymentController.searchBothUsersAndMakePayment(
-      context,  // Pass the BuildContext here
-      senderUsername,
+      context,
+      _senderAccountID!,
       receiverUsername,
       paymentAmount,
-      paymentType
-    );
-
-    // Show a confirmation or error after payment processing
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Payment processed')),
+      paymentType,
     );
   }
 
@@ -43,10 +66,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
         child: Column(
           children: [
             TextField(
-              controller: _senderUsernameController,
-              decoration: const InputDecoration(labelText: 'Your Username'),
-            ),
-            TextField(
               controller: _receiverUsernameController,
               decoration: const InputDecoration(labelText: 'Receiver Username'),
             ),
@@ -58,7 +77,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: makePayment,
-              child: const Text('Send Payment',style: TextStyle(fontSize: 18),),
+              child: const Text('Send Payment'),
             ),
           ],
         ),

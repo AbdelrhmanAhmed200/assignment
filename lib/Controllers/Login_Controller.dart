@@ -8,6 +8,7 @@ import '../Models/Login_Model.dart';
 
 class LoginController {
   final BuildContext context;
+  bool isLoading = false;
 
   LoginController({required this.context});
 
@@ -15,6 +16,9 @@ class LoginController {
     const String apiUrl = 'https://ptechapp-5ab6d15ba23c.herokuapp.com/user/authenticate';
 
     try {
+      // Set loading to true
+      isLoading = true;
+
       final response = await http.post(
         Uri.parse(apiUrl),
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
@@ -24,21 +28,20 @@ class LoginController {
       log('Response Status: ${response.statusCode}');
       log('Response Body: ${response.body}');
 
+      // Handle response
       if (response.statusCode == 200 && response.body != '''{"success":false}''') {
         final data = LoginResponse.fromJson(jsonDecode(response.body));
         final userAccountID = data.data.userAccountId;
 
-        log('data: $data'); // Ensure this matches your API response
+        log('data: $data');
         log('userAccountID: $userAccountID');
 
         // Save userAccountID to SharedPreferences
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('userAccountID', userAccountID);
+        await prefs.setString('userAccountID', userAccountID);  // Save user ID
 
-        // Optionally save token to secure storage here (if token available)
-        
-        // Navigate to home after successful login
-        Navigator.pushReplacementNamed(context, '/home');
+        // Navigate to TransferPage after successful login
+        Navigator.pushReplacementNamed(context, '/home', arguments: userAccountID);
       } else {
         final errorData = jsonDecode(response.body);
         final errorMessage = errorData['message'] ?? 'Username or Password wrong';
@@ -46,6 +49,9 @@ class LoginController {
       }
     } catch (e) {
       _showSnackBar('Error: $e');
+    } finally {
+      // Set loading to false
+      isLoading = false;
     }
   }
 

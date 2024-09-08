@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/view/payment_screen.dart';
 import '../Sup_Classes/Transfe_bulidicon1.dart';
 import '../Sup_Classes/Transfer_ContactTile.dart';
-
+import '../Controllers/main_payment_control.dart'; // Assuming this is the correct path
 
 class TransferPage extends StatelessWidget {
   const TransferPage({super.key});
@@ -14,114 +14,119 @@ class TransferPage extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-             Stack(
+            Stack(
               children: [
                 Container(
-                            padding: const EdgeInsets.all(2), // Space between avatar and border
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 98, 47, 238),
-                                  Color.fromARGB(255, 239, 142, 242)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                            ),
-                          child: Container(
-                            padding: const EdgeInsets.all(2), // Space between avatar and border
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 238, 238, 239),
-                                  Color.fromARGB(255, 251, 251, 251)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                            ),
-                  child: const CircleAvatar(
-                    backgroundImage: AssetImage('images/me.png'),
-                    radius: 20,
+                  padding: const EdgeInsets.all(2),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 98, 47, 238),
+                        Color.fromARGB(255, 239, 142, 242)
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 238, 238, 239),
+                          Color.fromARGB(255, 251, 251, 251)
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                    ),
+                    child: const CircleAvatar(
+                      backgroundImage: AssetImage('images/me.png'),
+                      radius: 20,
+                    ),
                   ),
                 ),
-                ),
                 Positioned(
-                  top: 4, // Adjust this to position the dot correctly
-                  right: 1, // Adjust this to position the dot correctly
+                  top: 4,
+                  right: 1,
                   child: Container(
                     width: 8,
                     height: 8,
-                    decoration:  BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: const Color.fromARGB(219, 245, 5, 5),
                       border: Border.all(
-                                  color: Colors.white,
-                                  
-                                ),
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-             const Spacer(),
-            const SizedBox(width: 8), // Space between image and text
+            const Spacer(),
+            const SizedBox(width: 8),
             const Text(
               "Transfer",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-             const Spacer(),
+            const Spacer(),
           ],
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.add), // The "+" sign
+            icon: const Icon(Icons.add),
             onPressed: () {
-                                       Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const PaymentScreen(),
-                            ),
-                          );
-             
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PaymentScreen(),
+                ),
+              );
             },
           ),
         ],
       ),
-      body: const Center(
-       child: Padding(
-        padding: EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
+      body: FutureBuilder<List<Map<String, dynamic>>>(
+        future: MainPaymentControl().fetchAllPaymentDetails(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No payment details found'));
+          }
 
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-             TransfeBulidicon1(image: "images/icons/k(1).png"),
-             TransfeBulidicon1(image: "images/icons/s(1).png"),
-             TransfeBulidicon1(image: "images/icons/p(1).png"),
-             TransfeBulidicon1(image: "images/icons/n(1).png"),
-              ]
+          final payments = snapshot.data!;
+          return Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      TransfeBulidicon1(image: "images/icons/k(1).png"),
+                      TransfeBulidicon1(image: "images/icons/s(1).png"),
+                      TransfeBulidicon1(image: "images/icons/p(1).png"),
+                      TransfeBulidicon1(image: "images/icons/n(1).png"),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  ...payments.map((payment) => TransferContactTile(
+                    name: payment['receiverName'],
+                    account: "AW BANK UNI 234-46589-000",
+                    paymentAmount: payment['paymentAmount'],
+                  )).toList(),
+                ],
+              ),
             ),
-            SizedBox(height: 20,),
-            TransferContacttile(name: "Abdelrhman Ahmed", account: "AW BANK UNI 234-46589-000", image: "images/me.png") ,
-            TransferContacttile(name: "Al-hassan Osama", account: "AW BANK UNI 234-46589-000", image:"images/IMG_20220424_210854.jpg") ,
-            TransferContacttile(name: "Mazen Ahmed", account: "AW BANK UNI 234-46589-000", image:"images/mazen.jpg") ,
-            TransferContacttile(name: "James Henry", account: "AW BANK UNI 234-46589-000", image:"images/n.jpeg") ,
-            TransferContacttile(name: "Oliver Wilson", account: "AW BANK UNI 234-46589-000", image:"images/m(1).png") ,
-            TransferContacttile(name: "Liam Henry", account: "AW BANK UNI 234-46589-000", image:"images/m(2).png") ,
-          ]
-        )
-        
-        )
-       )
-       )
-
-          // Placeholder content
-     
-    ); 
+          );
+        },
+      ),
+    );
   }
 }
+

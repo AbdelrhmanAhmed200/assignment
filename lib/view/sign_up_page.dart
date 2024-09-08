@@ -183,11 +183,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: RichText(
                   text: TextSpan(
                     text: "Already have an account? ",
-                    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 18),
                     children: [
                       TextSpan(
                         text: "Login",
-                        style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                        style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold,fontSize: 18),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.pushReplacement(
@@ -196,10 +196,12 @@ class _SignUpPageState extends State<SignUpPage> {
                             );
                           },
                       ),
+                      
                     ],
                   ),
                 ),
               ),
+              const SizedBox(height: 35,),
             ],
           ),
         ),
