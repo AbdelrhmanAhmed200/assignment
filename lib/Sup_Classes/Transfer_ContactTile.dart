@@ -68,7 +68,7 @@ class TransferContactTile extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(width: 80,),
+                    const SizedBox(width: 65,),
                     Text(
                       "\$${paymentAmount}", // Formatting as currency
                       style: const TextStyle(

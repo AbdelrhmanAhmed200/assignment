@@ -5,7 +5,7 @@ import 'package:flutter_application_1/view/login_page.dart';
 import 'package:flutter_application_1/view/sign_up_page.dart';
 
 import 'view/Home_page.dart';
-import 'Pages/Transfer_page.dart';
+import 'view/Transfer_page.dart';
 import 'Pages/Reports_page.dart';
 import 'view/More_page.dart';
 
