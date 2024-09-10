@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           // 1/4 Circle at the top right
@@ -86,6 +87,7 @@ class _HomePageState extends State<HomePage> {
           ),
           // Main content
           SingleChildScrollView(
+            
             child: Padding(
               padding: const EdgeInsets.all(35.0),
               child: Column(
@@ -171,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 20, width: 50),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.8,
-                        height: MediaQuery.of(context).size.height * 0.119,
+                        height: MediaQuery.of(context).size.height * 0.13,
                         padding: const EdgeInsets.all(8),
                         decoration: const BoxDecoration(
                           color: Colors.white,

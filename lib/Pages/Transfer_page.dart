@@ -1,9 +1,9 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/view/payment_screen.dart';
 import '../Sup_Classes/Transfe_bulidicon1.dart';
 import '../Sup_Classes/Transfer_ContactTile.dart';
-import '../Controllers/main_payment_control.dart'; // Assuming this is the correct path
-
+import '../Controllers/main_payment_control.dart';
 
 class TransferPage extends StatefulWidget {
   const TransferPage({super.key});
@@ -32,7 +32,7 @@ class _TransferPageState extends State<TransferPage> {
     try {
       final fetchedPayments = await MainPaymentControl().fetchAllPaymentDetails();
       setState(() {
-        payments = fetchedPayments;
+        payments = fetchedPayments.reversed.toList();
         isLoading = false;
       });
     } catch (error) {
@@ -40,6 +40,7 @@ class _TransferPageState extends State<TransferPage> {
         hasError = true;
         isLoading = false;
       });
+      debugPrint('Error fetching payment details: $error'); // Print error details
     }
   }
 
@@ -50,6 +51,7 @@ class _TransferPageState extends State<TransferPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -130,49 +132,80 @@ class _TransferPageState extends State<TransferPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Row(
-                children: [
-                  TransfeBulidicon1(image: "images/icons/k(1).png"),
-                  TransfeBulidicon1(image: "images/icons/s(1).png"),
-                  TransfeBulidicon1(image: "images/icons/p(1).png"),
-                  TransfeBulidicon1(image: "images/icons/n(1).png"),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  const Text(
-                    "Transfers",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const Spacer(),
-                  const SizedBox(width: 10),
-                  IconButton(
-                    icon: const Icon(Icons.refresh),
-                    onPressed: _refreshPage,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              // Display loading, error or data
-              if (isLoading)
-                const Center(child: CircularProgressIndicator()),
-              if (hasError)
-                const Center(child: Text('Error loading payment details')),
-              if (!isLoading && !hasError && payments.isEmpty)
-                const Center(child: Text('No payment details found')),
-              if (!isLoading && !hasError)
-                ...payments.reversed.map((payment) => TransferContactTile(
-                      name: payment['receiverName'],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              children: [
+                TransfeBulidicon1(image: "images/icons/k(1).png"),
+                TransfeBulidicon1(image: "images/icons/s(1).png"),
+                TransfeBulidicon1(image: "images/icons/p(1).png"),
+                TransfeBulidicon1(image: "images/icons/n(1).png"),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                const Text(
+                  "Transfers",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const Spacer(),
+                const SizedBox(width: 10),
+                IconButton(
+                  icon: const Icon(Icons.refresh),
+                  onPressed: _refreshPage,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+  child: isLoading
+      ? const Center(child: CircularProgressIndicator())
+      : hasError
+          ? const Center(child: Text('Error loading payment details'))
+          : payments.isEmpty
+              ? const Center(child: Text('No payment details found'))
+              : ListView.builder(
+                reverse: false,
+                  itemCount: payments.length,
+                  itemBuilder: (context, index) {
+                    if (index < 0 || index >= payments.length) {
+                      log('[TransferPage] Invalid index: $index for payments length: ${payments.length}');
+                      return const SizedBox.shrink();  // Prevent further rendering if index is invalid
+                    }
+
+                    final payment = payments[index];
+
+                    // Log the payment for debugging
+                    log('[TransferPage] Payment at index $index: $payment');
+
+                    // Handle invalid or null payment data gracefully
+                    if (payment == null || payment.isEmpty) {
+                      log('[TransferPage] Invalid or null payment at index $index');
+                      return const SizedBox.shrink();  // Return empty widget if invalid
+                    }
+
+                    // Extract details safely
+                    final receiverName = payment['receiverName'] ?? 'Unknown Receiver';
+                    final accountNumber = payment['receiverAccountNumber'] ?? 'Unknown Account';
+                    final paymentAmount = payment['paymentAmount']?.toString() ?? '0.0';
+
+                    log('[TransferPage] Displaying payment: Receiver Name = $receiverName, '
+                        'Account Number = $accountNumber, Payment Amount = $paymentAmount');
+
+                    // Ensure valid data before rendering TransferContactTile
+                    return TransferContactTile(
+                      name: receiverName,
                       account: "AW BANK UNI 234-46589-000",
-                      paymentAmount: payment['paymentAmount'],
-                    )).toList(),
-            ],
-          ),
+                      paymentAmount: paymentAmount,
+                    );
+                  },
+                ),
+)
+
+
+          ],
         ),
       ),
     );

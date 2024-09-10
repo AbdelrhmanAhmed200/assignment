@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 
 class TransferContactTile extends StatelessWidget {
-  
   final String name;
   final String account;
   final String paymentAmount;
 
   const TransferContactTile({
-    super.key, 
+    super.key,
     required this.name,
     required this.account,
-    required this.paymentAmount
+    required this.paymentAmount,
   });
 
   // Function to extract initials from the name
   String getInitials(String name) {
     List<String> nameParts = name.split(' ');
     String initials = '';
-    if (nameParts.length > 1) {
-      initials = nameParts[0][0] + nameParts[1][0];
-    } else {
-      initials = nameParts[0][0];
+    if (nameParts.isNotEmpty) {
+      initials = nameParts[0];
+      if (nameParts.length > 1) {
+        initials += nameParts[1];
+      }
     }
-    return initials.toUpperCase();
+    return initials[0].toUpperCase( );
   }
 
   @override
@@ -61,33 +61,30 @@ class TransferContactTile extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ), 
-                SizedBox(width: 30,),
-                Text(
-                 "\$" + paymentAmount,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ), 
-
-                  ]
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 80,),
+                    Text(
+                      "\$${paymentAmount}", // Formatting as currency
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 10,),
-               
+                const SizedBox(height: 10),
                 Text(
                   account,
                   style: const TextStyle(
                     color: Colors.grey,
                   ),
                 ),
-               
               ],
             ),
           ],
