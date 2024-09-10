@@ -181,7 +181,7 @@ class _TransferPageState extends State<TransferPage> {
                     log('[TransferPage] Payment at index $index: $payment');
 
                     // Handle invalid or null payment data gracefully
-                    if (payment == null || payment.isEmpty) {
+                    if (payment.isEmpty) {
                       log('[TransferPage] Invalid or null payment at index $index');
                       return const SizedBox.shrink();  // Return empty widget if invalid
                     }

@@ -2,18 +2,18 @@
 
 import 'dart:developer';
 
+import 'package:flutter_application_1/Controllers/Prefs_Controller.dart';
 import 'package:flutter_application_1/Models/Home_page_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class UserController {
-  Future<String?> getUserAccountId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('userAccountID');
-  }
+class UserController extends GetxController {
+   PrefsController  prefsController = Get.find<PrefsController>();
+  
 
-  Future<User?> fetchUserByAccountId(String userAccountID) async {
+  Future<User?> fetchUserByAccountId() async {
     final response = await http.get(Uri.parse('https://ptechapp-5ab6d15ba23c.herokuapp.com/users'));
 
     if (response.statusCode == 200) {
@@ -23,7 +23,7 @@ class UserController {
 
         // Iterate through the list and find the matching userAccountID
         for (var user in users) {
-          if (user['userAccountID'] == userAccountID) {
+          if (user['userAccountID'] == prefsController.getuser()) {
             return User.fromJson(user);
           }
         }

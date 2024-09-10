@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Pages/Login_Screen/onboarding_screen.dart';
-import 'package:flutter_application_1/Pages/Nav_Bar.dart';
+import 'package:flutter_application_1/Pages/controller_page.dart';
+import 'package:flutter_application_1/bindings.dart';
+
 import 'package:flutter_application_1/view/login_page.dart';
 import 'package:flutter_application_1/view/sign_up_page.dart';
-
-import 'view/Home_page.dart';
-import 'view/Transfer_page.dart';
-import 'Pages/Reports_page.dart';
-import 'view/More_page.dart';
+import 'package:get/get.dart';
 
 
 void main() {
@@ -19,7 +17,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -28,47 +26,16 @@ class App extends StatelessWidget {
         ),
       ),
       initialRoute: '/',
-      routes: {
-        '/': (context) => const OnBoardingScreen(),
-        '/signUp': (context) => const SignUpPage(),
-        '/login' : (context) => const LoginPage(),
-        '/home': (context) => const MyApp(), // Added route for MyApp
-      },
+      initialBinding: Binding(),
+    
+      getPages: [
+        GetPage(name: '/', page: () => const OnBoardingScreen(), ),
+        GetPage(name: '/signUp', page: () => const SignUpPage(), ),
+        GetPage(name: '/login', page: () => const LoginPage(), ),
+        GetPage(name: '/home', page: () => const MyApp(), )
+      ],
     );
   }
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
 
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-   int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    const HomePage(),
-    const TransferPage(),
-    const ReportsPage(),
-    const MorePage(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: NavBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
-    );
-  }
-}

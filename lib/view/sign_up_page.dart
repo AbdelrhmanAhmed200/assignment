@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/view/login_page.dart';
 import 'package:flutter_application_1/Controllers/Sign_Up_Controller.dart';
 import 'package:flutter_application_1/Models/Sign_Up_Model.dart';
+import 'package:get/get.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -259,7 +260,7 @@ class _SignUpPageState extends State<SignUpPage> {
       );
       return;
     }
-
+        SignUpController controller =Get.put(SignUpController());
     // Proceed with sign-up if all validations pass
     final user = User(
       firstName: firstName,
@@ -269,7 +270,7 @@ class _SignUpPageState extends State<SignUpPage> {
       password: password,
     );
 
-    final controller = SignUpController(context: context);
-    controller.signUp(user);
+   controller.signUp(user);
+    Get.offAllNamed('/login');
   }
 }

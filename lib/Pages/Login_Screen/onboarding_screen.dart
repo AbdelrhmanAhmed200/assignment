@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Pages/Login_Screen/login_screen.dart';
 import 'package:flutter_application_1/view/sign_up_page.dart';
-import 'login_screen1.dart';
-import 'login_screen2.dart';
-import 'login_screan3.dart';
+
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -55,11 +54,21 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 onLastPage = (index == 2);
               });
             },
-            children: const [
+            children: [
               // Replace with your actual onboarding content widgets
-              LoginScreen1(),
-              LoginScreen2(),
-              login_screen3(),
+              
+              LoginScreen(
+                image: "images/login.png",
+               title: 'Easy, Fast & Trusted',
+               description:'Fast money transfer and guaranteed safe transactions with others.' ,),
+              LoginScreen(
+                image: "images/login2.png",
+               title: 'Free Transactions',
+               description:'Provides the quality of the financial system with free money transactions without any fees.',),
+              LoginScreen(
+                image: "images/login3.png",
+               title: 'Bills Payment Made Easy',
+               description:'Pay monthly or daily bills at home in a site of ' ,)
             ],
           ),
           // Dot indicators

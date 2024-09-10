@@ -1,14 +1,18 @@
 import 'dart:convert';
 import 'dart:developer'; // Import the log function
+import 'package:flutter_application_1/Controllers/Prefs_Controller.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+
 import '../Models/main_transfer_model.dart';
 
-class MainPaymentControl {
+class MainPaymentControl extends GetxController {
+  PrefsController  prefsController = Get.find<PrefsController>();
+
   // Fetch userAccountID from SharedPreferences
   Future<String?> getUserAccountId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('userAccountID');
+    final userid = prefsController.getuser();
+    return  userid;
   }
 
   // Fetch all payment details by userAccountID (no pagination)

@@ -1,12 +1,16 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Controllers/Prefs_Controller.dart';
 import 'package:flutter_application_1/Models/userpay_model.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class PaymentController {
+class PaymentController extends GetxController {
+ PrefsController  prefsController = Get.find<PrefsController>();
+
   static Future<void> searchBothUsersAndMakePayment(
-    BuildContext context,
+    
     String senderAccountID,
     String receiverUsername,
     double paymentAmount,
@@ -17,21 +21,21 @@ class PaymentController {
       final receiverAccountID = await _getUserAccountIDByUsername(receiverUsername);
       if (receiverAccountID == null) {
         log('Receiver user not found');
-        _showSnackBar(context, 'Receiver user not found');
+       
         return;
       }
 
       // Step 2: Proceed to make payment using both IDs
-      await _makePayment(context, senderAccountID, receiverAccountID, paymentAmount, paymentType);
+      await _makePayment( senderAccountID, receiverAccountID, paymentAmount, paymentType);
     } catch (e) {
       log('Error: $e');
-      _showSnackBar(context, 'Error occurred: $e');
+      
     }
   }
 
   // Helper function to make the payment using both IDs
   static Future<void> _makePayment(
-    BuildContext context,
+    
     String senderAccountID,
     String receiverAccountID,
     double paymentAmount,
@@ -57,26 +61,17 @@ class PaymentController {
 
       if (response.statusCode == 200) {
         log('Payment successful');
-        _showSnackBar(context, 'Payment successful');
-        Navigator.pop(context); // Return to the previous screen
+        
+        // Return to the previous screen
       } else {
         final errorData = jsonDecode(response.body);
         final errorMessage = errorData['message'] ?? 'Check your data';
-        _showSnackBar(context, 'Payment Failed: $errorMessage');
+        
       }
     } catch (e) {
       log('Error during payment: $e');
-      _showSnackBar(context, 'Payment failed due to an error: $e');
+      
     }
-  }
-
-  // Function to show SnackBar
-  static void _showSnackBar(BuildContext context, String message) {
-    final snackBar = SnackBar(
-      content: Text(message),
-      duration: const Duration(seconds: 3), // Duration for how long the SnackBar will be visible
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   // Helper function to fetch `userAccountID` from API based on `username`

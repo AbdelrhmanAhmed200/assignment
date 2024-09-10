@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_application_1/Controllers/Login_Controller.dart';
 import 'package:flutter_application_1/Models/Login_Model.dart';
+import 'package:get/get.dart';
 
 import 'sign_up_page.dart';
 
@@ -111,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                       // Handle Google login
                       
                     },
-                    child: Container(
+                    child: Container( 
                       width: 60,
                       height: 60,
                       padding: const EdgeInsets.all(10),
@@ -198,21 +199,28 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _onLoginPressed() {
-    final userLogin = UserLogin(
-      username: _usernameController.text,
-      password: _passwordController.text,
-    );
 
-    if (userLogin.username.isEmpty || userLogin.password.isEmpty) {
+  void _onLoginPressed() async {
+    if (_usernameController.text.isEmpty || _passwordController.text.isEmpty) {
       // Show error if username or password is empty
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Username and password cannot be empty')),
       );
       return;
     }
+    LoginController controller =Get.put(LoginController());
 
-    final loginController = LoginController(context: context);
-    loginController.login(userLogin);
+    final userLogin = UserLogin(
+      username: _usernameController.text,
+      password: _passwordController.text,
+    );
+   await controller.login(userLogin);
+if(controller.isLoading.value){
+    Get.offAllNamed('/home');
+
+}else{
+  Get.snackbar('error', 'no user found');
+}
+    
   }
 }

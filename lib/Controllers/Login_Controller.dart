@@ -1,23 +1,28 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Controllers/Prefs_Controller.dart';
 import 'package:flutter_application_1/Models/login_response.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/Login_Model.dart';
 
-class LoginController {
-  final BuildContext context;
-  bool isLoading = false;
+class LoginController extends GetxController {
+  
+  
+   ValueNotifier <bool> _isLoading = ValueNotifier(false);
+  ValueNotifier<bool> get isLoading => _isLoading;
 
-  LoginController({required this.context});
+
+  PrefsController  prefsController = Get.find<PrefsController>();
+
+
+ 
 
   Future<void> login(UserLogin userLogin) async {
     const String apiUrl = 'https://ptechapp-5ab6d15ba23c.herokuapp.com/user/authenticate';
 
-    try {
-      // Set loading to true
-      isLoading = true;
+   
+     
 
       final response = await http.post(
         Uri.parse(apiUrl),
@@ -25,39 +30,21 @@ class LoginController {
         body: jsonEncode(userLogin.toJson()),
       );
 
-      log('Response Status: ${response.statusCode}');
-      log('Response Body: ${response.body}');
+      
 
       // Handle response
       if (response.statusCode == 200 && response.body != '''{"success":false}''') {
+      
         final data = LoginResponse.fromJson(jsonDecode(response.body));
         final userAccountID = data.data.userAccountId;
+        _isLoading.value = true;
 
-        log('data: $data');
-        log('userAccountID: $userAccountID');
-
-        // Save userAccountID to SharedPreferences
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('userAccountID', userAccountID);  // Save user ID
+         prefsController.setuser(userAccountID);
+          // Save user ID
 
         // Navigate to TransferPage after successful login
-        Navigator.pushReplacementNamed(context, '/home', arguments: userAccountID);
-      } else {
-        final errorData = jsonDecode(response.body);
-        final errorMessage = errorData['message'] ?? 'Username or Password wrong';
-        _showSnackBar('Login Failed: $errorMessage');
-      }
-    } catch (e) {
-      _showSnackBar('Error: $e');
-    } finally {
-      // Set loading to false
-      isLoading = false;
+        
+      } 
     }
   }
-
-  void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
-  }
-}
+  

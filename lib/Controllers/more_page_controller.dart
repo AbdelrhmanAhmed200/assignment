@@ -1,14 +1,16 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_application_1/Controllers/Prefs_Controller.dart';
+import 'package:get/get.dart';
+
 import 'package:http/http.dart' as http;
 
-// Function to handle deleting the account
+PrefsController  prefsController = Get.find<PrefsController>();
 Future<void> deleteAccount(BuildContext context) async {
   // Retrieve userAccountID from SharedPreferences
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? userAccountID = prefs.getString('userAccountID');
+  
+  String? userAccountID = prefsController.getuser();
 
   if (userAccountID != null) {
     

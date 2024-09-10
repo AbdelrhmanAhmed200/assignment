@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Controllers/Home_Controller.dart';
+import 'package:flutter_application_1/Controllers/Prefs_Controller.dart';
 import 'package:flutter_application_1/Models/Home_page_model.dart';
+import 'package:get/get.dart';
 
 import '../Sup_Classes/transaction_item.dart';
 import '../Pages/transactions_page.dart';
@@ -15,7 +17,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? username;
   double? balance;
-  final UserController _controller = UserController();
+   UserController _controller =  Get.put(UserController());
+
+  PrefsController  prefsController = Get.find<PrefsController>();
+  
 
   @override
   void initState() {
@@ -24,10 +29,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadUserData() async {
-    String? userAccountID = await _controller.getUserAccountId();
-    if (userAccountID != null) {
+    
+    
       try {
-        User? user = await _controller.fetchUserByAccountId(userAccountID);
+        User? user = await _controller.fetchUserByAccountId();
         if (user != null) {
           setState(() {
             username = user.username;
@@ -45,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           SnackBar(content: Text('Failed to load user data: $e')),
         );
       }
-    }
+    
   }
 
   @override
