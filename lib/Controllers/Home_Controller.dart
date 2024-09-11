@@ -16,7 +16,7 @@ class UserController extends GetxController {
   Future<User?> fetchUserByAccountId() async {
     final response = await http.get(Uri.parse('https://ptechapp-5ab6d15ba23c.herokuapp.com/users'));
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 && response.body != '''{"success":false}''') {
       try {
         // Decode the list of users
         List<dynamic> users = json.decode(response.body);

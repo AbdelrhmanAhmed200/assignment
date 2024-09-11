@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Models/Sign_up_Response.dart';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/Models/Sign_Up_Model.dart';

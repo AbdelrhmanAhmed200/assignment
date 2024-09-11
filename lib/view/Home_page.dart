@@ -102,39 +102,39 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     children: [
                       Stack(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 98, 47, 238),
-                                  Color.fromARGB(255, 239, 142, 242)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 238, 238, 239),
-                                  Color.fromARGB(255, 251, 251, 251)
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                            ),
-                            child: const CircleAvatar(
-                              backgroundImage: AssetImage('images/me.png'),
-                              radius: 30,
-                            ),
-                          ),
+                       children: [
+                Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 98, 47, 238),
+                        Color.fromARGB(255, 239, 142, 242)
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 238, 238, 239),
+                          Color.fromARGB(255, 251, 251, 251)
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                    ),
+                    child: const CircleAvatar(
+                      backgroundImage: AssetImage('images/me.png'),
+                      radius: 35,
+                    ),
+                  ),
+                ),
                           Positioned(
                             top: 5.5,
                             right: 4,

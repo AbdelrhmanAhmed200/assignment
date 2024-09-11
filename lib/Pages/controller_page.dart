@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
     const HomePage(),
     const TransferPage(),
     const ReportsPage(),
-    const MorePage(),
+     MorePage(),
   ];
 
   void _onItemTapped(int index) {

@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Controllers/Prefs_Controller.dart';
 import 'package:flutter_application_1/Controllers/more_page_controller.dart'; // Import the controller for the delete logic
-import 'package:flutter_application_1/view/login_page.dart'; // Import the signup page
+import 'package:flutter_application_1/view/login_page.dart';
+import 'package:get/get.dart'; // Import the signup page
 
 class MorePage extends StatelessWidget {
-  const MorePage({super.key});
+   MorePage({super.key});
+  PrefsController  prefsController = Get.find<PrefsController>();
+  
 
-  void _signOut(BuildContext context) {
-    // Implement sign-out logic if needed here
-    // For now, we'll just navigate to the SignupPage
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginPage ()), // Navigate to SignupPage
-    );
+  void _signOut() {
+  prefsController.deleteuser();
+  Get.offAllNamed('/login');
+    
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('More options'),
       ),
-      body: Center(
+      body: 
+      Center(
         child: Padding(
           padding: const EdgeInsets.all(35.0),
           child: Column(
@@ -36,7 +39,7 @@ class MorePage extends StatelessWidget {
               ),
               const SizedBox(height: 20), // Add spacing between buttons
               ElevatedButton(
-                onPressed: () => _signOut(context), // Navigate to SignupPage
+                onPressed: () => _signOut(), // Navigate to SignupPage
                 child: const Text(
                   'Sign Out',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/Models/Home_page_model.dart';
+
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,6 +25,7 @@ setuser(String userid){
 
 
 }
-
-
+deleteuser(){
+  prefs?.remove('user');
+}
 }

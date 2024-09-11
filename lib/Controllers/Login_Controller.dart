@@ -20,7 +20,7 @@ class LoginController extends GetxController {
 
   Future<void> login(UserLogin userLogin) async {
     const String apiUrl = 'https://ptechapp-5ab6d15ba23c.herokuapp.com/user/authenticate';
-
+    _isLoading.value = false;
    
      
 
@@ -40,10 +40,7 @@ class LoginController extends GetxController {
         _isLoading.value = true;
 
          prefsController.setuser(userAccountID);
-          // Save user ID
-
-        // Navigate to TransferPage after successful login
-        
+          
       } 
     }
   }

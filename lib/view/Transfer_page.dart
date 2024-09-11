@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Controllers/Home_Controller.dart';
 import 'package:flutter_application_1/view/payment_screen.dart';
+import 'package:get/get.dart';
 import '../Sup_Classes/Transfe_bulidicon1.dart';
 import '../Sup_Classes/Transfer_ContactTile.dart';
 import '../Controllers/main_payment_control.dart';
@@ -16,6 +18,7 @@ class _TransferPageState extends State<TransferPage> {
   List<Map<String, dynamic>> payments = [];
   bool isLoading = true;
   bool hasError = false;
+  UserController _controller =  Get.put(UserController());
 
   @override
   void initState() {
@@ -56,6 +59,7 @@ class _TransferPageState extends State<TransferPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            
             Stack(
               children: [
                 Container(
@@ -130,7 +134,9 @@ class _TransferPageState extends State<TransferPage> {
           ),
         ],
       ),
-      body: Padding(
+      body:
+      
+       Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

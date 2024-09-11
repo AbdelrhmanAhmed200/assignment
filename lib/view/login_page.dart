@@ -203,9 +203,7 @@ class _LoginPageState extends State<LoginPage> {
   void _onLoginPressed() async {
     if (_usernameController.text.isEmpty || _passwordController.text.isEmpty) {
       // Show error if username or password is empty
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Username and password cannot be empty')),
-      );
+      Get.snackbar('error', 'Username and password cannot be empty');
       return;
     }
     LoginController controller =Get.put(LoginController());
@@ -219,7 +217,7 @@ if(controller.isLoading.value){
     Get.offAllNamed('/home');
 
 }else{
-  Get.snackbar('error', 'no user found');
+  Get.snackbar('error', 'username or password wrong');
 }
     
   }

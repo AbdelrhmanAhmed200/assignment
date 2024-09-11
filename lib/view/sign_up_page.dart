@@ -221,43 +221,35 @@ class _SignUpPageState extends State<SignUpPage> {
 
     // Validation for fields that should not start or end with space
     if (firstName.isEmpty || lastName.isEmpty || username.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('First Name, Last Name, and Username cannot be empty')),
-      );
+      Get.snackbar('error', 'First Name, Last Name, and Username cannot be empty');
       return;
     }
 
     if (_firstNameController.text != firstName ||
         _lastNameController.text != lastName ||
         _usernameController.text != username) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Fields cannot start or end with spaces')),
-      );
+      Get.snackbar('error', 'Fields cannot start or end with spaces');
       return;
     }
 
     // Email format validation using regex
     final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
     if (!emailRegex.hasMatch(email)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Invalid email format')),
-      );
+      Get.snackbar('error', 'Invalid email format');
       return;
     }
 
     // Password length validation
     if (password.length < 8) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Password must be at least 8 characters long')),
-      );
+     Get.snackbar('error', 'Password must be at least 8 characters long');
       return;
     }
 
     // Passwords match validation
     if (password != confirmPassword) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Passwords do not match')),
-      );
+      
+        Get.snackbar('error', 'Passwords do not match');
+      
       return;
     }
         SignUpController controller =Get.put(SignUpController());
