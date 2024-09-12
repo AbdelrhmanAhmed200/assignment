@@ -22,22 +22,16 @@ Future<void> deleteAccount(BuildContext context) async {
     if (response.statusCode == 500) {
       log('Response Status: ${response.statusCode}');
       // Account deleted successfully
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Account deleted successfully')),
-      );
+      Get.snackbar('success', 'Account deleted successfully');
 
       // Navigate to the SignUpPage after deletion
       Navigator.pushReplacementNamed(context, '/signUp');
     } else {
       // Handle error
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to delete account')),
-      );
+      Get.snackbar('error', 'Failed to delete account');
     }
   } else {
     // Handle case where userAccountID is not found
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('User not logged in')),
-    );
+  Get.snackbar('error', 'User not logged in');
   }
 }

@@ -40,15 +40,11 @@ class _HomePageState extends State<HomePage> {
           });
         } else {
           // Show error if no user is found
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('User not found')),
-          );
+         Get.snackbar('error', 'User not found');
         }
       } catch (e) {
         // Handle error
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to load user data: $e')),
-        );
+        Get.snackbar('error', 'Failed to load user data: $e');
       }
     
   }
