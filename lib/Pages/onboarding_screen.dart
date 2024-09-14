@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Pages/Login_Screen/login_screen.dart';
+import 'package:flutter_application_1/Sup_Classes/login_screen.dart';
 import 'package:flutter_application_1/view/sign_up_page.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
