@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? username;
   double? balance;
-   UserController _controller =  Get.put(UserController());
+   final UserController _controller =  Get.put(UserController());
 
   PrefsController  prefsController = Get.find<PrefsController>();
   

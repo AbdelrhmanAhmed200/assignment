@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Controllers/Prefs_Controller.dart';
 import 'package:flutter_application_1/Pages/onboarding_screen.dart';
 import 'package:flutter_application_1/Pages/controller_page.dart';
 import 'package:flutter_application_1/bindings.dart';
@@ -9,6 +10,7 @@ import 'package:get/get.dart';
 
 
 void main() {
+  Get.lazyPut(() => PrefsController());
   runApp(const App());
 }
 
@@ -21,7 +23,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          showSelectedLabels: false,
+          showSelectedLabels: true,
           showUnselectedLabels: false,
         ),
       ),

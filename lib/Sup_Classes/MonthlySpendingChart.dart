@@ -28,7 +28,7 @@ class MonthlySpendingChart extends StatelessWidget {
               BarChartData(
                 alignment: BarChartAlignment.spaceAround,
                 maxY: 700,
-                barTouchData: BarTouchData(enabled: false),
+                barTouchData: BarTouchData(enabled: true),
                 titlesData: FlTitlesData(
                   show: true,
                   bottomTitles: AxisTitles(
