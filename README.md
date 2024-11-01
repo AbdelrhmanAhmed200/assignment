@@ -19,7 +19,7 @@ This Flutter project is a simple banking application designed to help users mana
 ## app
 [Welcome screen 1](https://drive.google.com/file/d/1wFHos1WTCXkZe8E_-mv5TjQr__Thx48V/view?usp=drive_link)
 
-![Welcome screen 2](https://drive.google.com/file/d/1UFF6fzcFIog0gM2hrH1lGk-FQPshtDTv/view?usp=drive_link)
+[Welcome screen 2](https://drive.google.com/file/d/1UFF6fzcFIog0gM2hrH1lGk-FQPshtDTv/view?usp=drive_link)
 
 [Welcome screen 3](https://drive.google.com/file/d/1k2NiqsmQKnVztajQMv_vcTK23aFVo__e/view?usp=drive_link)
 
