@@ -9,7 +9,7 @@ import '../Models/Login_Model.dart';
 class LoginController extends GetxController {
   
   
-   ValueNotifier <bool> _isLoading = ValueNotifier(false);
+   final ValueNotifier <bool> _isLoading = ValueNotifier(false);
   ValueNotifier<bool> get isLoading => _isLoading;
 
 

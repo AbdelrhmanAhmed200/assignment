@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Controllers/Prefs_Controller.dart';
 import 'package:flutter_application_1/Controllers/more_page_controller.dart'; // Import the controller for the delete logic
-import 'package:flutter_application_1/view/login_page.dart';
 import 'package:get/get.dart'; // Import the signup page
 
 class MorePage extends StatelessWidget {

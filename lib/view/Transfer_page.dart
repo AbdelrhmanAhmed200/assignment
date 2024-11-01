@@ -20,7 +20,7 @@ class _TransferPageState extends State<TransferPage> {
   bool isLoading = true;
   bool hasError = false;
    
-  UserController _controller =  Get.put(UserController());
+  final UserController _controller =  Get.put(UserController());
 
   @override
   void initState() {
