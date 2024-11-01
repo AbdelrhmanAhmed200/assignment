@@ -17,27 +17,27 @@ This Flutter project is a simple banking application designed to help users mana
 
 
 ## app
-![Welcome screen 1](https://drive.google.com/file/d/1wFHos1WTCXkZe8E_-mv5TjQr__Thx48V/view?usp=drive_link)
+[Welcome screen 1](https://drive.google.com/file/d/1wFHos1WTCXkZe8E_-mv5TjQr__Thx48V/view?usp=drive_link)
 
 ![Welcome screen 2](https://drive.google.com/file/d/1UFF6fzcFIog0gM2hrH1lGk-FQPshtDTv/view?usp=drive_link)
 
-![Welcome screen 3](https://drive.google.com/file/d/1k2NiqsmQKnVztajQMv_vcTK23aFVo__e/view?usp=drive_link)
+[Welcome screen 3](https://drive.google.com/file/d/1k2NiqsmQKnVztajQMv_vcTK23aFVo__e/view?usp=drive_link)
 
-![Sign up](https://drive.google.com/file/d/1-WwkkK_D5QxtccLOij2tXNblUccjyLjF/view?usp=drive_link)
+[Sign up](https://drive.google.com/file/d/1-WwkkK_D5QxtccLOij2tXNblUccjyLjF/view?usp=drive_link)
 
-![Login](https://drive.google.com/file/d/1x8-_Q5E0sa8pA0pzM6hjAXAFqIxZmAT9/view?usp=drive_link)
+[Login](https://drive.google.com/file/d/1x8-_Q5E0sa8pA0pzM6hjAXAFqIxZmAT9/view?usp=drive_link)
 
-![Home page](https://drive.google.com/file/d/1DoaIUmTgG6uglRJV5SNihBJc2d8r-k1z/view?usp=drive_link)
+[Home page](https://drive.google.com/file/d/1DoaIUmTgG6uglRJV5SNihBJc2d8r-k1z/view?usp=drive_link)
 
-![Transactions page](https://drive.google.com/file/d/1JfRBoLJDvHsX-jB8shj0rvIT1seL7Uzy/view?usp=drive_link)
+[Transactions page](https://drive.google.com/file/d/1JfRBoLJDvHsX-jB8shj0rvIT1seL7Uzy/view?usp=drive_link)
 
-![Transfer page](https://drive.google.com/file/d/1o2ywU_4pHfnUncIZ0pQ0PstuwJcLEbZd/view?usp=drive_link)
+[Transfer page](https://drive.google.com/file/d/1o2ywU_4pHfnUncIZ0pQ0PstuwJcLEbZd/view?usp=drive_link)
 
-![Make payment](https://drive.google.com/file/d/1SckANAVg9g7vHpCvZYXpLnLU3U4MHh7a/view?usp=drive_link)
+[Make payment](https://drive.google.com/file/d/1SckANAVg9g7vHpCvZYXpLnLU3U4MHh7a/view?usp=drive_link)
 
-![Reports](https://drive.google.com/file/d/1FOndAX-2hV38-RwDsGlpV0WtGYOLIHF7/view?usp=drive_link)
+[Reports](https://drive.google.com/file/d/1FOndAX-2hV38-RwDsGlpV0WtGYOLIHF7/view?usp=drive_link)
 
-![More option](https://drive.google.com/file/d/1cZ6ixwZ7SHuj6jKCze4HzVNylzrXV-fm/view?usp=drive_link)
+[More option](https://drive.google.com/file/d/1cZ6ixwZ7SHuj6jKCze4HzVNylzrXV-fm/view?usp=drive_link)
 
 
 ## Installation
